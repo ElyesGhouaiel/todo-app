@@ -19,3 +19,15 @@ jobs:
           token: ${{ secrets.ACCESSTOKEN }}
       - name: 🚀 Build app
         run: eas build --platform android --non-interactive --no-wait
+      - name: Install Netlify
+        run: npm install netlify-cli -g
+      - name: Build web
+        run: yarn build-web
+      - name: Deploy to Netlify
+        id: netlify_deploy
+        run: |
+          netlify deploy \
+            --dir ./dist \
+            --site ${{ secrets.7db13fcb-8e16-4206-a23f-eb25f4e942b6 }} \
+            --auth ${{ secrets.nfp_MK8yQFgeYoYm2k8juhfANbdJnrnxXtaH7441 }}
+
