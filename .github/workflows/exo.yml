@@ -12,3 +12,10 @@ jobs:
           node-version: '22'
       - run: npm ci --legacy-peer-deps
       - run: npm test
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.ACCESSTOKEN }}
+      - name: 🚀 Build app
+        run: eas build --platform android --non-interactive --no-wait
